@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siva Kumar Saranti - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Updated background: layered gradients for a dynamic effect */
+            background-image:
+                linear-gradient(to bottom, #f0f2ff, transparent 30%),  /* Top layer: light blue to transparent */
+                radial-gradient(circle at center, #e0e7ff 0%, #d1d8f3 70%, #f0f2ff 100%); /* Bottom layer: radial gradient */
+            background-size: cover, cover;
+            background-position: top, center;
+            background-attachment: fixed;
+        }
+        .project-card {
+            background-color: white;
+            border-radius: 0.5rem;
+             /* Subtle shadow, more refined */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Add transition for shadow too */
+        }
+        .project-card:hover {
+            transform: translateY(-0.75rem);
+             /* Increased shadow on hover */
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        }
+        .project-card h3 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1f2937;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+       .project-card h3:hover {
+            color: #4f46e5;
+        }
+        .project-card p {
+            line-height: 1.75;
+            color: #4b5563;
+        }
+        .project-card ul {
+            list-style-position: inside;
+            margin-bottom: 1rem;
+            color: #4b5563;
+        }
+        .project-card img {
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            width: 100%;
+            height: auto;
+            /* Added subtle image shadow */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .project-card img:hover {
+             transform: scale(1.03);
+             /* Increased shadow on image hover */
+             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow */
+        }
+
+        .nav-link:hover {
+            background-color: #6d28d9;
+            transform: translateY(-0.25rem);
+             /* Increased shadow on hover */
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .active-nav-link {
+            background-color: #4c1d95;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .section-link {
+            color: #4f46e5;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.3s ease, font-weight 0.3s ease, border-bottom-color 0.3s ease;
+            font-weight: 600;
+            padding-bottom: 0.25rem;
+            border-bottom: 2px solid transparent;
+        }
+
+        .section-link:hover {
+            color: #6366f1;
+            font-weight: 700;
+            border-bottom-color: #6366f1;
+        }
+        #about {
+            background-color: #f3e5f5;
+            padding: 4rem 0;
+            border-radius: 0.75rem;
+            margin-bottom: 2rem;
+             /* Added a rounded shadow to the about section */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        #about h2{
+             color: #8b5cf6;
+        }
+        #projects h2{
+             color: #8b5cf6;
+        }
+        #skills h2{
+             color: #8b5cf6;
+        }
+        #education h2{
+             color: #8b5cf6;
+        }
+        #contact h2{
+             color: #8b5cf6;
+        }
+        .slide-in-left {
+            animation: slideInLeft 0.5s ease-in-out;
+            transform: translateX(-100%);
+        }
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+        .slide-in-right {
+            animation: slideInRight 0.5s ease-in-out;
+            transform: translateX(100%);
+        }
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+        .slide-out-left {
+            animation: slideOutLeft 0.5s ease-in-out;
+            transform: translateX(0);
+        }
+        @keyframes slideOutLeft {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+        .slide-out-right {
+            animation: slideOutRight 0.5s ease-in-out;
+            transform: translateX(0);
+        }
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(100%);
+            }
+        }
+        /* Flip animation */
+        .flip-in-x {
+            animation: flipInX 0.7s ease-in;
+        }
+        .flip-out-x {
+            animation: flipOutX 0.7s ease-out;
+        }
+        @keyframes flipInX {
+            from {
+                transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+                opacity: 0;
+            }
+            to {
+                transform: perspective(400px);
+                opacity: 1;
+            }
+        }
+        @keyframes flipOutX {
+            from {
+                transform: perspective(400px);
+                opacity: 1;
+            }
+            to {
+                transform: perspective(400px) rotate3d(1, 0, 0, -90deg);
+                opacity: 0;
+            }
+        }
+
+    </style>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-semibold tracking-tight">Siva Kumar Saranti</h1>
+            <p class="text-xl font-medium">Electrical Engineer</p>
+            <nav class="mt-8">
+                <a href="#about" class="nav-link active-nav-link">About Me</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#education" class="nav-link">Education</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-10">
+        <section id="about" class="mb-12">
+            <h2 class="text-3xl font-semibold  mb-6 text-center">About Me</h2>
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <div class="md:w-1/3">
+                    <img src="images/siva profile.jpg" alt="Siva Kumar Saranti" class="rounded-full shadow-lg">
+                </div>
+                <div class="md:w-2/3 text-gray-700 leading-relaxed text-lg">
+                    <p>
+                        Seeking an entry-level position as an Electrical Engineer, I am eager to apply my technical skills and problem-solving abilities to design and implement innovative solutions. I am passionate about contributing to organizational growth while enhancing my expertise in the field. My academic background in Electrical and Electronics Engineering, coupled with hands-on training and internships, has provided me with a strong foundation in electrical design, AutoCAD, and EV technology. I am a quick learner with strong analytical thinking and time management skills.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="mb-12 hidden">
+            <h2 class="text-3xl font-semibold  mb-6">Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="project-card">
+                    <h3 data-project-id="project1" style="cursor: pointer;">Timeline Driven Dynamic Vehicle Speed Control System</h3>
+                    <div id="project1-details" style="display: none; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e7eb;">
+                        <p><b>Developed a dynamic vehicle speed control system that adjusts in real-time based on timeline data, enhancing the efficiency and safety of next-generation intelligent transport systems.</b></p>
+                        <br>
+                        <ul>
+                            <li><b>Role:</b> Project Developer</li>
+                            <br>
+                            <li><b>Responsibilities:</b> Designed and implemented the control system, conducted simulations, and analyzed performance data.</li>
+                             <br>
+                            <li><b>Skills Used:</b>  Control Systems, MATLAB, Data Analysis, Communication Protocols</li>
+                        </ul>
+                        <p><b>Key Achievements/Results:</b> Improved traffic flow efficiency by 15% in simulated urban environments and reduced potential collision rates by 10%.</p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 data-project-id="project2" style="cursor: pointer;">AutoCAD Electrical Schematics and Wiring Diagrams</h3>
+                    <div id="project2-details" style="display: none; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e7eb;">
+                        <p><b>Created detailed electrical schematics, wiring diagrams, and panel layouts for industrial applications using AutoCAD.</b></p>
+                        <br>
+                        <ul>
+                            <li><b>Role:</b> AutoCAD Designer</li>
+                            <br>
+                            <li><b>Responsibilities:</b> Drafted schematics, wiring diagrams, and panel layouts.</li>
+                            <br>
+                            <li><b>Skills Used:</b>  AutoCAD, Electrical Design, Drafting</li>
+                        </ul>
+                        <p><b>Key Achievements/Results:</b>  Successfully completed designs for 3 industrial projects, reducing design errors by 20% and improving project turnaround time.</p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 data-project-id="project3" style="cursor: pointer;">Electrical Vehicle Systems Analysis</h3>
+                    <div id="project3-details" style="display: none; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e7eb;">
+                        <p><b>Gained foundational understanding of electric vehicle architecture, including battery systems, power electronics, and motor control units.</b></p>
+                        <br>
+                        <ul>
+                            <li><b>Role:</b> EV Intern</li>
+                            <br>
+                            <li><b>Responsibilities:</b> Assisted in research, data collection, and analysis of EV systems.</li>
+                            <br>
+                            <li><b>Skills Used:</b>  EV Architecture, Battery Systems, Power Electronics, Motor Control</li>
+                        </ul>
+                        <p><b>Key Achievements/Results:</b>  Contributed to a research report on battery management systems, which informed future design considerations.</p>
+                    </div>
+                </div>
+            </div>
+             <p class="mt-6 text-gray-700 text-lg">
+                These projects demonstrate my ability to apply electrical engineering principles to real-world challenges. I have experience in designing and implementing control systems, creating detailed electrical drawings, and analyzing electric vehicle systems.
+            </p>
+            <div class="mt-8 text-center">
+                 <a href="#projects" class="section-link text-xl">View Projects</a>
+            </div>
+        </section>
+
+        <section id="skills" class="mb-12 hidden">
+            <h2 class="text-3xl font-semibold  mb-6">Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <h3 class="text-xl font-semibold  mb-4">Technical Skills</h3>
+                    <ul class="list-disc list-inside text-lg">
+                        <li>AutoCAD</li>
+                        <li>Dialux</li>
+                        <li>Circuit Design</li>
+                        <li>Internet of Things (IoT)</li>
+                        <li>Renewable Energy Systems</li>
+                        <li>Electric Vehicles</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold  mb-4">Hardware Skills</h3>
+                    <ul class="list-disc list-inside text-lg">
+                        <li>Circuit Design</li>
+                        <li>Internet of Things</li>
+                    </ul>
+                </div>
+                 <div>
+                    <h3 class="text-xl font-semibold  mb-4">Soft Skills</h3>
+                    <ul class="list-disc list-inside text-lg">
+                        <li>Problem-Solving Skills</li>
+                         <li>Time Management</li>
+                        <li>Quick Learning</li>
+                         <li>Analytical Thinking</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="mt-6 text-gray-700 text-lg">
+               This section highlights my technical proficiencies in software and hardware, as well as my strong soft skills.
+            </p>
+            <div class="mt-8 text-center">
+                <a href="#skills" class="section-link text-xl">View Skills</a>
+            </div>
+        </section>
+
+        <section id="education" class="mb-12 hidden">
+            <h2 class="text-3xl font-semibold  mb-6">Education</h2>
+            <div>
+                <h3 class="text-xl font-semibold  mb-2">Bachelor of Technology in Electrical and Electronics Engineering</h3>
+                <p class="text-gray-600 text-lg">Narasaraopeta Engineering College, Narasaraopet (2022 - Present)</p>
+                <p class="text-gray-600 text-lg">CGPA: 7.5</p>
+            </div>
+            <div class="mt-6">
+                <h3 class="text-xl font-semibold  mb-2">Diploma in Electrical and Electronics Engineering</h3>
+                <p class="text-gray-600 text-lg">Benaiah Institute of Technology and Science, Rajamahendravaram (2019 - 2022)</p>
+                 <p class="text-gray-600 text-lg">PERCENTAGE: 75.54</p>
+            </div>
+            <div class="mt-6">
+                <h3 class="text-xl font-semibold  mb-2">Secondary Education</h3>
+                <p class="text-gray-600 text-lg">Zilla Parishad High School, A.L.puram (2014-2019)</p>
+                <p class="text-gray-600 text-lg">GPA: 9.7</p>
+            </div>
+            <div class="mt-8 text-center">
+                 <a href="#education" class="section-link text-xl">View Education</a>
+            </div>
+        </section>
+
+        <section id="contact" class="mb-12 hidden">
+            <h2 class="text-3xl font-semibold  mb-6">Contact Me</h2>
+            <p class="text-gray-700 mb-4 text-lg">
+                Email: <a href="mailto:sivakumarsaranthi8985@gmail.com" class="text-blue-600 hover:underline">sivakumarsaranthi8985@gmail.com</a>
+            </p>
+            <p class="text-gray-700 text-lg">
+                Phone: <a href="tel:+916305081065" class="text-blue-600 hover:underline">+91 63050 81065</a>
+            </p>
+            <p class="text-gray-700 text-lg">
+                LinkedIn: <a href="https://www.linkedin.com/in/sivakumarsaranti" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">sivakumarsaranti</a>
+            </p>
+            <div class="mt-8 text-center">
+                <a href="#contact" class="section-link text-xl">View Contact</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-200 text-gray-700 py-6 mt-10">
+        <div class="container mx-auto px-4 text-center text-lg">
+            &copy; <?php echo date("Y"); ?> All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        let activeSectionId = 'about';
+        let activeProjectId = null;
+
+        document.querySelectorAll('.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+
+                if (targetId !== activeSectionId) {
+                    // Hide the currently active section
+                    const activeSection = document.getElementById(activeSectionId);
+                    if(activeSectionId !== 'about'){ // Dont slide out About
+                         activeSection.classList.add(activeSectionId === 'skills' || activeSectionId === 'contact' ? 'slide-out-right' : 'slide-out-left');
+                         setTimeout(() => {
+                            activeSection.classList.add('hidden');
+                            activeSection.classList.remove('slide-out-right');
+                            activeSection.classList.remove('slide-out-left');
+                        }, 500); // 500ms is the duration of the slideOut animation
+                    }
+
+
+                    // Show the new section
+                    const targetElement = document.getElementById(targetId);
+                    targetElement.classList.remove('hidden');
+                    if(targetId !== 'about'){
+                         targetElement.classList.add(targetId === 'projects' || targetId === 'education' ? 'slide-in-left' : 'slide-in-right');
+                         setTimeout(()=> {
+                            targetElement.classList.remove('slide-in-left')
+                            targetElement.classList.remove('slide-in-right')
+                        },500)
+                    }
+
+
+                    activeSectionId = targetId;
+
+                    // Update active nav link
+                    document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active-nav-link'));
+                    this.classList.add('active-nav-link');
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.location.hash) {
+                const targetId = window.location.hash.substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                     document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active-nav-link'));
+                     const activeLink = document.querySelector(`[href="#${targetId}"]`);
+                      if (activeLink) {
+                         activeLink.classList.add('active-nav-link');
+                       }
+                    targetElement.classList.remove('hidden'); //show the element
+                    if(targetId !== 'about'){
+                         targetElement.classList.add(targetId === 'projects' || targetId === 'education' ? 'slide-in-left' : 'slide-in-right');
+                          setTimeout(()=> {
+                            targetElement.classList.remove('slide-in-left')
+                            targetElement.classList.remove('slide-in-right')
+                        },500)
+                    }
+
+                    activeSectionId = targetId;
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+
+        document.querySelectorAll('.section-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+
+                if (targetId !== activeSectionId) {
+                    // Hide the currently active section
+                    const activeSection = document.getElementById(activeSectionId);
+                    if(activeSectionId !== 'about'){
+                         activeSection.classList.add(activeSectionId === 'skills' || activeSectionId === 'contact' ? 'slide-out-right' : 'slide-out-left');
+                        setTimeout(() => {
+                            activeSection.classList.add('hidden');
+                            activeSection.classList.remove('slide-out-right');
+                            activeSection.classList.remove('slide-out-left');
+                        }, 500);
+                    }
+
+
+                    // Show the new section
+                    targetSection.classList.remove('hidden');
+                    if(targetId !== 'about'){
+                         targetSection.classList.add(targetId === 'projects' || targetId === 'education' ? 'slide-in-left' : 'slide-in-right');
+                         setTimeout(()=> {
+                             targetSection.classList.remove('slide-in-left')
+                             targetSection.classList.remove('slide-in-right')
+                        },500)
+                    }
+
+                    activeSectionId = targetId;
+
+                    // Update active nav link
+                    document.querySelectorAll('.nav-link').forEach(navLink => {
+                        navLink.classList.remove('active-nav-link');
+                        if (navLink.getAttribute('href') === `#${targetId}`) {
+                            navLink.classList.add('active-nav-link');
+                        }
+                    });
+                }
+                 targetSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        document.querySelectorAll('.project-card h3').forEach(title => {
+            title.addEventListener('click', function() {
+                const projectId = this.getAttribute('data-project-id');
+                const detailsElementId = `${projectId}-details`;
+                const detailsElement = document.getElementById(detailsElementId);
+
+                // Close any previously open project details
+                if (activeProjectId && activeProjectId !== projectId) {
+                    const activeDetailsElement = document.getElementById(`${activeProjectId}-details`);
+                    activeDetailsElement.classList.remove('flip-in-x');
+                    activeDetailsElement.classList.add('flip-out-x');
+                    setTimeout(() => {
+                        activeDetailsElement.style.display = 'none';
+                        activeDetailsElement.classList.remove('flip-out-x');
+                    }, 700);
+                }
+
+                // Toggle the display of the clicked project details
+                if (detailsElement.style.display === 'none') {
+                    detailsElement.style.display = 'block';
+                    detailsElement.classList.add('flip-in-x');
+                    activeProjectId = projectId; // Update the active project ID
+                } else {
+                    detailsElement.classList.remove('flip-in-x');
+                    detailsElement.classList.add('flip-out-x');
+                    setTimeout(() => {
+                        detailsElement.style.display = 'none';
+                        detailsElement.classList.remove('flip-out-x');
+                    }, 700);
+                    activeProjectId = null; // Clear the active project ID
+                }
+            });
+        });
+    </script>
+</body>
+</html>
